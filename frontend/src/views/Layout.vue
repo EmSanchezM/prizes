@@ -17,17 +17,17 @@
 </template>
 
 <script lang="ts">
-import Nav from "@/components/Nav.vue";
-import Menu from "@/components/Menu.vue";
+import Nav from "../components/Nav.vue";
+import Menu from "../components/Menu.vue";
 import axios from "axios";
-import { User } from "@/models/user";
 
 export default {
   name: "Layout",
   components: { Menu, Nav },
   async mounted() {
     try {
-      const { data } = await axios.get("user");
+      const { data } = await axios.get("sessions");
+      
       await this.$store.dispatch("setUser", data);
     } catch (e) {
       await this.$router.push("/login");

@@ -7,18 +7,18 @@
         <input
           v-model="name"
           class="form-control"
-          placeholder="First Name"
+          placeholder="Nombre"
         />
-        <label>First Name</label>
+        <label>Nombre</label>
       </div>
 
       <div class="form-floating mb-3">
         <input
           v-model="lastName"
           class="form-control"
-          placeholder="Last Name"
+          placeholder="Apellido"
         />
-        <label>Last Name</label>
+        <label>Apellido</label>
       </div>
 
       <div class="form-floating mb-3">
@@ -28,7 +28,7 @@
           class="form-control"
           placeholder="name@example.com"
         />
-        <label>Email address</label>
+        <label>Correo electronico</label>
       </div>
 
       <div class="form-floating mb-3">
@@ -36,9 +36,9 @@
           v-model="password"
           type="password"
           class="form-control"
-          placeholder="Password"
+          placeholder="Contraseña"
         />
-        <label>Password</label>
+        <label>Contraseña</label>
       </div>
 
       <div class="form-floating">
@@ -46,12 +46,32 @@
           v-model="passwordConfirm"
           type="password"
           class="form-control"
-          placeholder="Password Confirm"
+          placeholder="Confirmar Contraseña"
         />
-        <label>Password Confirm</label>
+        <label>Confirmar Contraseña</label>
       </div>
 
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+      <div class="form-floating mb-3">
+        <input
+          v-model="phoneNumber"
+          type="text"
+          class="form-control"
+          placeholder="Número de telefono"
+        />
+        <label>Telefono</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          v-model="birth"
+          type="date"
+          class="form-control"
+          placeholder="Fecha de nacimiento"
+        />
+        <label>Fecha de nacimiento</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Registrarse</button>
     </form>
   </main>
 </template>
@@ -59,7 +79,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Register",
+  name: "Registro",
   data() {
     return {
       name: "",
@@ -67,6 +87,8 @@ export default {
       email: "",
       password: "",
       passwordConfirm: "",
+      phoneNumber: "",
+      birth: ""
     };
   },
   methods: {
@@ -77,7 +99,10 @@ export default {
         email: this.email,
         password: this.password,
         passwordConfirm: this.passwordConfirm,
+        phoneNumber: this.phoneNumber,
+        birth: this.birth
       });
+      
       await this.$router.push("/login");
     },
   },

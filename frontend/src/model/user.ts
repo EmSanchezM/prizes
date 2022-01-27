@@ -5,6 +5,8 @@ export class User {
     email!: string;
     password!: string;
     accumulatedPoints?: number;
+    phoneNumber?: string;
+    birth?: Date;
     role?: string;
     createdAt?: Date;
     updatedAt?: Date; 

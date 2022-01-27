@@ -17,7 +17,7 @@ export default {
   name: "Nav",
   methods: {
     async logout() {
-      await axios.post('logout');
+      await axios.delete('sessions');
       await this.$router.push('/login');
     }
   },
