@@ -1,13 +1,13 @@
 <template>
   <div>
-    <v-simple-table>
-      <template v-slot:default>
+    <table class="table">
+      <template>
         <thead>
           <tr>
             <th class="text-left">#</th>
             <th class="text-left">Name</th>
             <th class="text-left">Email</th>
-            <th class="text-left">Actions</th>
+            <th class="text-left">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@
           </tr>
         </tbody>
       </template>
-    </v-simple-table>
+    </table>
 
     <div class="text-center">
       <v-pagination
@@ -44,7 +44,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Users",
+  name: "Usuarios",
   data() {
     return {
       users: [],
@@ -54,7 +54,7 @@ export default {
     };
   },
   async mounted() {
-    const { data } = await axios.get("ambassadors");
+    const { data } = await axios.get("users");
     this.users = data;
     this.lastPage = Math.ceil(data.length / this.perPage);
   },

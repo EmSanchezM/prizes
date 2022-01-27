@@ -1,4 +1,4 @@
-import { User } from '../model/user'
+import { User } from '@/model/user'
 import { createStore, Commit } from 'vuex'
 
 export default createStore({

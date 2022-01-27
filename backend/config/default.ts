@@ -8,8 +8,8 @@ export default {
     saltWorkFactor: 10,
     accessToken: "30m",
     refreshToken: "1y",
-    accessTokenPrivateKey: ``,
-    accessTokenPublicKey: ``,
+    accessTokenPrivateKey: process.env.PRIVATE_KEY,
+    accessTokenPublicKey: process.env.PUBLIC_KEY,
     refreshTokenPrivateKey: ``,
     refreshTokenPublicKey: ``,
 }
