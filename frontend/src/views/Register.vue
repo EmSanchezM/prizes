@@ -1,27 +1,27 @@
 <template>
   <main class="form-signin">
     <form @submit.prevent="submit">
-      <h1 class="h3 mb-3 fw-normal">Please register</h1>
+      <h1 class="h3 mb-3 fw-normal text-center">Registro de Usuario</h1>
 
-      <div class="form-floating">
+      <div class="form-floating mb-3">
         <input
-          v-model="first_name"
+          v-model="name"
           class="form-control"
           placeholder="First Name"
         />
         <label>First Name</label>
       </div>
 
-      <div class="form-floating">
+      <div class="form-floating mb-3">
         <input
-          v-model="last_name"
+          v-model="lastName"
           class="form-control"
           placeholder="Last Name"
         />
         <label>Last Name</label>
       </div>
 
-      <div class="form-floating">
+      <div class="form-floating mb-3">
         <input
           v-model="email"
           type="email"
@@ -31,7 +31,7 @@
         <label>Email address</label>
       </div>
 
-      <div class="form-floating">
+      <div class="form-floating mb-3">
         <input
           v-model="password"
           type="password"
@@ -43,7 +43,7 @@
 
       <div class="form-floating">
         <input
-          v-model="password_confirm"
+          v-model="passwordConfirm"
           type="password"
           class="form-control"
           placeholder="Password Confirm"
@@ -62,21 +62,21 @@ export default {
   name: "Register",
   data() {
     return {
-      first_name: "",
-      last_name: "",
+      name: "",
+      lastName: "",
       email: "",
       password: "",
-      password_confirm: "",
+      passwordConfirm: "",
     };
   },
   methods: {
     async submit() {
       await axios.post("register", {
-        first_name: this.first_name,
-        last_name: this.last_name,
+        name: this.name,
+        lastName: this.lastName,
         email: this.email,
         password: this.password,
-        password_confirm: this.password_confirm,
+        passwordConfirm: this.passwordConfirm,
       });
       await this.$router.push("/login");
     },
