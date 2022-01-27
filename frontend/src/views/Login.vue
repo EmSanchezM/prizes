@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     async submit() {
-      await axios.post("login", {
+      await axios.post("sessions", {
         email: this.email,
         password: this.password,
       });

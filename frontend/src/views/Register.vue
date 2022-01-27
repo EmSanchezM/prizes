@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     async submit() {
-      await axios.post("register", {
+      await axios.post("users", {
         name: this.name,
         lastName: this.lastName,
         email: this.email,
