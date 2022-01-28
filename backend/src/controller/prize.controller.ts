@@ -1,17 +1,3 @@
-/*let pointsResult: number;
-    const user = await UserModel.findById(userId);
-    const prize = await Prize.findById(prizeId);
-
-    if(user && prize){
-        if(user?.accumulatedPoints >= quantityPoints){
-        
-           
-
-            pointsResult = user?.accumulatedPoints - quantityPoints;
-            const query = { _id: userId };
-            const userUpdate = await UserModel.findOneAndUpdate(query, { $set: { accumulatedPoinst: pointsResult } });
-        }
-    }*/
 import { Request, Response } from "express";
 import { omit } from "lodash";
 import { createPrizeSchema, updatePrizeSchema, deletePrizeSchema, CreatePrizeInput, ReadPrizeInput, UpdatePrizeInput, DeletePrizeInput, AssignPrizeInput } from "../schema/prize.schema";

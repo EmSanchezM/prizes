@@ -14,6 +14,7 @@ const routes: Array<RouteRecordRaw> = [
         children: [
             {path: '', redirect: '/usuarios'},
             {path: '/usuarios', component: Users},
+            {path: '/premios', component: Users},
         ]
     }
 ]
@@ -25,4 +26,8 @@ const router = createRouter({
 
 export default router
 
+
+/**
+ * {path: '', redirect: '/usuarios'}
+*/
 
