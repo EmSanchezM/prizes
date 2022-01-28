@@ -5,11 +5,11 @@ import config from "config";
 export interface UserDocument extends mongoose.Document {
     name: string;
     lastName: string;
-    phoneNumber: string;
-    birth: Date | string;
+    phoneNumber?: string;
+    birth?: Date | string;
     email: string;
     password: string;
-    accumulatedPoints: number | null;
+    accumulatedPoints: number;
     role: string;
     createdAt: Date;
     updatedAt: Date;
@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     },
     phoneNumber: { type: String },
     birth: { type: Date },
-    accumulatedPoints: { type: Number, min: 0 },
+    accumulatedPoints: { type: Number, default: 0 },
     email: {
         type: String,
         required: true,

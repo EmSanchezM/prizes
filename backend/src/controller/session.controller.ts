@@ -5,38 +5,34 @@ import {
   findSessions,
   updateSession,
 } from "../services/session.service";
-import { validatePassword } from "../services/user.service";
+import { findUser, validatePassword } from "../services/user.service";
 import { signJwt } from "../utils/jwt";
 
 export async function createUserSessionHandler(req: Request, res: Response) {
-  // Validate the user's password
   const user = await validatePassword(req.body);
 
   if (!user) {
-    return res.status(401).send("Invalid email or password");
+    return res.status(401).send("Invalid credentials");
   }
 
-  // create a session
-  const session = await createSession(user._id, req.get("user-agent") || "");
+  //const session = await createSession(user._id, req.get("user-agent") || "");
 
-  // create an access token
-
-  const accessToken = signJwt(
+  /*const accessToken = signJwt(
     { ...user, session: session._id },
     "accessTokenPrivateKey",
-    { expiresIn: config.get("accessTokenTtl") } // 15 minutes,
+    { expiresIn: config.get("accessToken") } // 15 minutes,
   );
 
-  // create a refresh token
   const refreshToken = signJwt(
     { ...user, session: session._id },
     "refreshTokenPrivateKey",
-    { expiresIn: config.get("refreshTokenTtl") } // 15 minutes
-  );
+    { expiresIn: config.get("refreshToken") } // 15 minutes
+  );*/
 
-  // return access & refresh tokens
-
-  return res.send({ accessToken, refreshToken });
+  return res.status(200).json({
+    ok: true,
+    user,
+  });
 }
 
 export async function getUserSessionsHandler(req: Request, res: Response) {
@@ -44,7 +40,12 @@ export async function getUserSessionsHandler(req: Request, res: Response) {
 
   const sessions = await findSessions({ user: userId, valid: true });
 
-  return res.send(sessions);
+  const user = await findUser(userId);
+
+  return res.status(200).json({
+    ok: true,
+    user
+  });
 }
 
 export async function deleteSessionHandler(req: Request, res: Response) {

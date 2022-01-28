@@ -28,7 +28,7 @@ export default {
     try {
       const { data } = await axios.get("sessions");
       
-      await this.$store.dispatch("setUser", data);
+      await this.$store.dispatch("setUser", data.user);
     } catch (e) {
       await this.$router.push("/login");
     }

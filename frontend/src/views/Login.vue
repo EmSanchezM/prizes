@@ -10,7 +10,7 @@
           class="form-control"
           placeholder="name@example.com"
         />
-        <label>Email address</label>
+        <label>Email</label>
       </div>
 
       <div class="form-floating">
@@ -20,7 +20,7 @@
           class="form-control"
           placeholder="Password"
         />
-        <label>Password</label>
+        <label>Contraseña</label>
       </div>
 
       <button class="w-100 btn btn-lg btn-primary" type="submit">

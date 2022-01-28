@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 export interface PrizeDocument extends mongoose.Document {
     name: string;
-    description: string;
+    description?: string;
     points: number;
 }
 
