@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { omit } from "lodash";
-import { createPrizeSchema, updatePrizeSchema, deletePrizeSchema, CreatePrizeInput, ReadPrizeInput, UpdatePrizeInput, DeletePrizeInput, AssignPrizeInput } from "../schema/prize.schema";
+
+import { CreatePrizeInput, ReadPrizeInput, UpdatePrizeInput, DeletePrizeInput, AssignPrizeInput } from "../schema/prize.schema";
 import { createPrize, updatePrize, deletePrize, assignPrize, findPrizes, findPrize } from "../services/prize.service";
 import { findUser } from "../services/user.service";
 import logger from "../utils/logger";
