@@ -22,7 +22,7 @@ import {
 
 const router = Router();
 
-router.get('/api/users', requireUser, findUsersHandler);
+router.get('/api/users', findUsersHandler);
 router.get('/api/users/:userId', validateResource(getUserSchema), findUserHandler);
 router.post('/api/users', validateResource(createUserSchema), createUserHandler);
 router.post('/api/admin/users', validateResource(createUserSchema), createAdminHandler);

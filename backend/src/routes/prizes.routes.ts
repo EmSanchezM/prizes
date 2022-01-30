@@ -8,6 +8,7 @@ import {
     findPrizeHandler,
     findPrizesHandler,
     assignPrizeUserHandler,
+    findExchangesHandler,
 } from '../controller/prize.controller';
 
 import { 
@@ -21,6 +22,7 @@ import {
 const router = Router();
 
 router.get('/api/prizes', findPrizesHandler);
+router.get('/api/exchanges', findExchangesHandler);
 router.get('/api/prizes/:prizeId', validateResource(getPrizeSchema), findPrizeHandler);
 router.post('/api/prizes', validateResource(createPrizeSchema), createPrizeHandler);
 router.put('/api/prizes/:prizeId', validateResource(updatePrizeSchema), updatePrizeHandler);

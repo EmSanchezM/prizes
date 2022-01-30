@@ -31,6 +31,15 @@ export async function findPrize(prizeId: string) {
   }
 }
 
+export async function findExchanges(){
+  try {
+    const exchanges = Exchange.find().populate('user', '-password').populate('prize')
+    return exchanges;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
+
 export async function updatePrize(prizeId: string, prizeUpdate: UpdateQuery<PrizeDocument>) {
   try {
     const prize = await Prize.findByIdAndUpdate(prizeId, prizeUpdate);
@@ -49,8 +58,9 @@ export async function assignPrize(user: DocumentDefinition<Omit<UserDocument, 'c
     });
 
     if(exchange){
-        let pointsResult = user.accumulatedPoints - prize.points;
-        await UserModel.findOneAndUpdate({_id: user._id }, { $set: { accumulatedPoinst: pointsResult } });
+      let pointsResult = user.accumulatedPoints - prize.points;
+        
+      await UserModel.findOneAndUpdate({_id: user._id}, { accumulatedPoints: pointsResult });
     }
 
     return exchange;

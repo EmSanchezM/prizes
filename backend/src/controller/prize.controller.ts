@@ -13,7 +13,8 @@ import {
     deletePrize,
     assignPrize,
     findPrizes,
-    findPrize
+    findPrize,
+    findExchanges
 } from "../services/prize.service";
 
 import { findUser } from "../services/user.service";
@@ -45,6 +46,22 @@ export async function findPrizesHandler(req: Request, res: Response) {
         return res.status(200).json({
             ok: true,
             prizes
+        });
+    } catch (error: any) {
+        logger.error(error);
+        return res.status(409).json({
+            ok: false,
+            message: error.message
+        });
+    }
+}
+
+export async function findExchangesHandler(req: Request, res: Response) {
+    try {
+        const exchanges = await findExchanges();
+        return res.status(200).json({
+            ok: true,
+            exchanges
         });
     } catch (error: any) {
         logger.error(error);
@@ -151,7 +168,8 @@ export async function assignPrizeUserHandler(
     try {
         const prizeId = req.params.prizeId;
         const prize = await findPrize(prizeId);
-        const user = await findUser(req.body);
+        const { userId } = req.body;
+        const user = await findUser(userId);
 
         if (!prize) {
             return res.status(404).json({

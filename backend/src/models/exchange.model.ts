@@ -9,13 +9,15 @@ export interface ExchangeDocument extends mongoose.Document {
 
 const exchangeSchema = new mongoose.Schema({
     user: { 
-        type: String, 
-        required: true,
-        trim: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
     prize: {
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Prize'
     },
+}, {
+    versionKey: false 
 });
 
 const Exchange = mongoose.model<ExchangeDocument>('Exchange', exchangeSchema);

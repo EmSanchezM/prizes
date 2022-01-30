@@ -16,6 +16,9 @@ const prizeSchema = new mongoose.Schema({
         type: String
     },
     points: { type: Number, required: true }
+},{
+    timestamps: true,
+    versionKey: false 
 });
 
 const Prize = mongoose.model<PrizeDocument>('Prize', prizeSchema);

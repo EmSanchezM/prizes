@@ -60,11 +60,12 @@ export async function updateUser(userId: string, userUpdate: UpdateQuery<UserDoc
 
 export async function assignPoints(userId: string, quantityPoints: number) {
   try {
-    const query = { _id: userId };
+    const filter = { _id: userId };
+    const updatePoints = { accumulatedPoints: quantityPoints };
 
-    const user = await UserModel.findOneAndUpdate(query, { $set: { accumulatedPoinst: quantityPoints } });
-
-    return user;
+    let userUpdated = await UserModel.findOneAndUpdate(filter, updatePoints);
+    
+    return omit(userUpdated?.toJSON(), 'password');
 
   } catch (error: any) {
     throw new Error(error);

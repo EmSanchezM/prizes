@@ -171,12 +171,16 @@ export async function assignPointsUserHandler(
               message: 'User not found'
           });
       }
+      const { quantityPoints } = req.body;
 
-      await assignPoints(userId, req.body);
+      let points = user.accumulatedPoints + quantityPoints; 
+
+      const userUpdate = await assignPoints(user._id, points);
 
       return res.status(200).json({
           ok: true,
-          message: 'Assigned Points successfully'
+          message: 'Assigned Points successfully',
+          user: userUpdate
       });
 
   } catch (error: any) {
