@@ -4,6 +4,7 @@ import Layout from "@/views/Layout.vue";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Users from "@/views/Users.vue";
+import Prizes from "@/views/Prizes.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {path: '/login', component: Login},
@@ -14,7 +15,7 @@ const routes: Array<RouteRecordRaw> = [
         children: [
             {path: '', redirect: '/usuarios'},
             {path: '/usuarios', component: Users},
-            {path: '/premios', component: Users},
+            {path: '/premios', component: Prizes},
         ]
     }
 ]
@@ -25,9 +26,4 @@ const router = createRouter({
 })
 
 export default router
-
-
-/**
- * {path: '', redirect: '/usuarios'}
-*/
 
