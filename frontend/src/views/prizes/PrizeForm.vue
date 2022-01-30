@@ -6,7 +6,7 @@
       <div class="mb-3">
         <label>Nombre</label>
         <input
-          v-model="name"
+          v-model="prize.name"
           type="text"
           class="form-control"
           placeholder="Nombre del premio"
@@ -15,7 +15,7 @@
       <div class="mb-3">
         <label>Descripcion</label>
         <input
-          v-model="description"
+          v-model="prize.description"
           type="text"
           class="form-control"
           placeholder="Descripcion del premio"
@@ -24,8 +24,8 @@
       <div class="mb-3">
         <label>Puntos</label>
         <input
-          v-model="points"
-          type="text"
+          v-model="prize.points"
+          type="number"
           class="form-control"
           placeholder="Puntos"
         />
@@ -47,41 +47,36 @@ export default {
       prize: {
         name: "",
         description: "",
-        points: 0,
-      },
+        points: 0
+      }
     };
   },
   async mounted() {
     if (this.$route.params.id) {
       const { data } = await axios.get(`prizes/${this.$route.params.id}`);
-
-      this.name = data.prize.name;
-      this.description = data.prize.description;
-      this.points = data.prize.points;
+      
+      this.prize.name = data.prize.name;
+      this.prize.description = data.prize.description;
+      this.prize.points = data.prize.points;
     }
   },
   methods: {
     async submitPrize() {
-      const dataForm = {
+      let dataForm = {
         name: this.prize.name,
         description: this.prize.description,
         points: this.prize.points,
       };
 
-      console.log(this.$route.params.id);
-
       if (this.$route.params.id) {
-        const { data } = await axios.put(
-          `prizes/${this.$route.params.id}`,
-          dataForm
-        );
+        const { data } = await axios.put(`prizes/${this.$route.params.id}`, dataForm);
 
         if (data.ok) {
           await this.$router.push("/premios");
         }
       } else {
-        const { data } = await axios.post("prizes", dataForm);
-
+        const { data } = await axios.post('prizes', dataForm);
+        
         if (data.ok) {
           await this.$router.push("/premios");
         }
