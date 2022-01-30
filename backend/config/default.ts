@@ -10,6 +10,6 @@ export default {
     refreshToken: "1y",
     accessTokenPrivateKey: process.env.PRIVATE_KEY,
     accessTokenPublicKey: process.env.PUBLIC_KEY,
-    refreshTokenPrivateKey: ``,
-    refreshTokenPublicKey: ``,
+    refreshTokenPrivateKey: process.env.PRIVATE_KEY,
+    refreshTokenPublicKey: process.env.PUBLIC_KEY,
 }

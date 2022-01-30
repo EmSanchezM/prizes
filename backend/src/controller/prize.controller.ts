@@ -1,7 +1,21 @@
 import { Request, Response } from "express";
 
-import { CreatePrizeInput, ReadPrizeInput, UpdatePrizeInput, DeletePrizeInput, AssignPrizeInput } from "../schema/prize.schema";
-import { createPrize, updatePrize, deletePrize, assignPrize, findPrizes, findPrize } from "../services/prize.service";
+import {
+    CreatePrizeInput,
+    ReadPrizeInput,
+    UpdatePrizeInput,
+    DeletePrizeInput,
+    AssignPrizeInput
+} from "../schema/prize.schema";
+import {
+    createPrize,
+    updatePrize,
+    deletePrize,
+    assignPrize,
+    findPrizes,
+    findPrize
+} from "../services/prize.service";
+
 import { findUser } from "../services/user.service";
 import logger from "../utils/logger";
 
@@ -10,7 +24,7 @@ export async function createPrizeHandler(
     res: Response
 ) {
     try {
-        
+
         const prize = await createPrize(req.body);
 
         return res.status(201).json({
@@ -153,7 +167,7 @@ export async function assignPrizeUserHandler(
             });
         }
 
-        if(prize.points > user.accumulatedPoints ){
+        if (prize.points > user.accumulatedPoints) {
             return res.status(400).json({
                 ok: false,
                 message: 'No tienes suficientes puntos acumulados'

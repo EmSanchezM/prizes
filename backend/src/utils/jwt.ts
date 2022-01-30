@@ -12,8 +12,7 @@ export function signJwt(
   ).toString("ascii");
 
   return jwt.sign(object, signingKey, {
-    ...(options && options),
-    algorithm: "RS256",
+    ...(options && options)
   });
 }
 

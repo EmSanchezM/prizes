@@ -5,7 +5,7 @@ import {
   findSessions,
   updateSession,
 } from "../services/session.service";
-import { findUser, validatePassword } from "../services/user.service";
+import { validatePassword } from "../services/user.service";
 import { signJwt } from "../utils/jwt";
 
 export async function createUserSessionHandler(req: Request, res: Response) {
@@ -15,23 +15,24 @@ export async function createUserSessionHandler(req: Request, res: Response) {
     return res.status(401).send("Invalid credentials");
   }
 
-  //const session = await createSession(user._id, req.get("user-agent") || "");
+  const session = await createSession(user._id, req.get("user-agent") || "");
 
-  /*const accessToken = signJwt(
+  const accessToken = signJwt(
     { ...user, session: session._id },
     "accessTokenPrivateKey",
-    { expiresIn: config.get("accessToken") } // 15 minutes,
+    { expiresIn: config.get("accessToken") } // 30 minutes,
   );
 
   const refreshToken = signJwt(
     { ...user, session: session._id },
     "refreshTokenPrivateKey",
-    { expiresIn: config.get("refreshToken") } // 15 minutes
-  );*/
+    { expiresIn: config.get("refreshToken") } // 30 minutes
+  );
 
   return res.status(200).json({
     ok: true,
-    user,
+    accessToken,
+    refreshToken
   });
 }
 
@@ -40,11 +41,9 @@ export async function getUserSessionsHandler(req: Request, res: Response) {
 
   const sessions = await findSessions({ user: userId, valid: true });
 
-  const user = await findUser(userId);
-
   return res.status(200).json({
     ok: true,
-    user
+    sessions
   });
 }
 
