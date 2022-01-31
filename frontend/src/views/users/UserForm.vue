@@ -2,11 +2,11 @@
   <div class="container mt-4">
     <h4 class="mb-2">Crear Usuario</h4>
     <hr />
-    <form @submit.prevent="submituser">
+    <form @submit.prevent="submitUser">
       <div class="mb-3">
         <label>Nombre</label>
         <input
-          v-model="name"
+          v-model="user.name"
           type="text"
           class="form-control"
           placeholder="Nombre del usuario"
@@ -15,7 +15,7 @@
       <div class="mb-3">
         <label>Apellido</label>
         <input
-          v-model="lastName"
+          v-model="user.lastName"
           type="text"
           class="form-control"
           placeholder="Apellido del usuario"
@@ -24,7 +24,7 @@
       <div class="mb-3">
         <label>Email</label>
         <input
-          v-model="email"
+          v-model="user.email"
           type="email"
           class="form-control"
           placeholder="Email del usuario"
@@ -33,16 +33,34 @@
       <div class="mb-3">
         <label>Telefono</label>
         <input
-          v-model="phoneNumber"
+          v-model="user.phoneNumber"
           type="text"
           class="form-control"
           placeholder="Telefono"
         />
       </div>
       <div class="mb-3">
+        <label>Contraseña</label>
+        <input
+          v-model="user.password"
+          type="password"
+          class="form-control"
+          placeholder="Asigna una contraseña al usuario"
+        />
+      </div>
+      <div class="mb-3">
+        <label>Repita la contraseña</label>
+        <input
+          v-model="user.passwordConfirm"
+          type="password"
+          class="form-control"
+          placeholder="Repita la contraseña asignada"
+        />
+      </div>
+      <div class="mb-3">
         <label>Fecha de nacimiento</label>
         <input
-          v-model="birth"
+          v-model="user.birth"
           type="date"
           class="form-control"
           placeholder="Fecha de nacimiento"
@@ -73,13 +91,16 @@ export default {
       },
     };
   },
-  async mounted() {},
   methods: {
     async submitUser() {
       const dataForm = {
         name: this.user.name,
         lastName: this.user.lastName,
         email: this.user.email,
+        phoneNumber: this.user.phoneNumber,
+        birth: this.user.birth,
+        password: this.user.password,
+        passwordConfirmation: this.user.passwordConfirm
       };
 
       const { data } = await axios.post("users", dataForm);
