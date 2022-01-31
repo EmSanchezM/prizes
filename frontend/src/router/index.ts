@@ -11,6 +11,10 @@ import UserForm from "@/views/users/UserForm.vue";
 import Prizes from "@/views/prizes/Prizes.vue";
 import PrizeForm from "@/views/prizes/PrizeForm.vue";
 
+//Exchanges 
+import Exchanges from '@/views/exchanges/Exchanges.vue';
+import ExchangeForm from "@/views/exchanges/ExchangeForm.vue";
+
 const routes: Array<RouteRecordRaw> = [
     {path: '/login', component: Login},
     {path: '/registro', component: Register},
@@ -24,6 +28,8 @@ const routes: Array<RouteRecordRaw> = [
             {path: '/premios', component: Prizes},
             {path: '/premios/crear-nuevo', component: PrizeForm},
             {path: '/premios/:id/editar', component: PrizeForm},
+            {path: '/canjear-premios', component: Exchanges},
+            {path: '/canjear-premios/:id', component: ExchangeForm},
         ]
     }
 ]

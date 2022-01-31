@@ -12,6 +12,11 @@
             Premios
           </router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/canjear-premios" class="nav-link" active-class="active">
+            Canjear Premios
+          </router-link>
+        </li>
       </ul>
     </div>
   </nav>
