@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 import Layout from "@/views/Layout.vue";
+//Auth
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
+//CRUD Users
 import Users from "@/views/users/Users.vue";
 import UserForm from "@/views/users/UserForm.vue";
+//CRUD Prizes
 import Prizes from "@/views/prizes/Prizes.vue";
 import PrizeForm from "@/views/prizes/PrizeForm.vue";
 

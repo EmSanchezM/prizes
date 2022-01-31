@@ -21,12 +21,6 @@
           <td>{{ user.email }}</td>
           <td>
             <button
-              :href="`/usuarios/${user._id}/editar`"
-              class="btn btn-outline-warning mx-2"
-            >
-              <svg style="width: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-            </button>
-            <button
               @click="deleteUser(user._id)"
               class="btn btn-outline-danger"
             >
@@ -42,7 +36,7 @@
 <script lang="ts">
 import axios from 'axios';
 import { defineComponent } from 'vue';
-import { User } from '../../model/User';
+import { User } from '../../model/user';
 
 export default defineComponent({
   name: "Usuarios",

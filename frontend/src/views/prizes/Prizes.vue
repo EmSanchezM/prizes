@@ -46,7 +46,7 @@
 <script lang="ts">
 import axios from 'axios';
 import { defineComponent } from 'vue';
-import { Prize } from '../../model/Prize';
+import { Prize } from '../../model/prize';
 
 export default defineComponent({
   name: "Premios",

@@ -73,16 +73,7 @@ export default {
       },
     };
   },
-  async mounted() {
-    if (this.$route.params.id) {
-      const { data } = await axios.get(`users/${this.$route.params.id}`);
-
-      this.name = data.user.name;
-      this.lastName = data.user.lastName;
-      this.email = data.user.email;
-      this.phoneNumber = data.user.phoneNumber
-    }
-  },
+  async mounted() {},
   methods: {
     async submitUser() {
       const dataForm = {
@@ -91,24 +82,12 @@ export default {
         email: this.user.email,
       };
 
-      console.log(this.$route.params.id);
+      const { data } = await axios.post("users", dataForm);
 
-      if (this.$route.params.id) {
-        const { data } = await axios.put(
-          `users/${this.$route.params.id}`,
-          dataForm
-        );
-
-        if (data.ok) {
-          await this.$router.push("/usuarios");
-        }
-      } else {
-        const { data } = await axios.post("users", dataForm);
-
-        if (data.ok) {
-          await this.$router.push("/usuarios");
-        }
+      if (data.ok) {
+        await this.$router.push("/usuarios");
       }
+      
     },
   },
 };
