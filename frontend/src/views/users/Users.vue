@@ -8,6 +8,7 @@
           <th class="text-left">#</th>
           <th class="text-left">Name</th>
           <th class="text-left">Email</th>
+          <th class="text-left">Puntos acumulados</th>
           <th class="text-left">Acciones</th>
         </tr>
       </thead>
@@ -19,7 +20,12 @@
           <td>{{ user._id }}</td>
           <td>{{ user.name }} {{ user.lastName }}</td>
           <td>{{ user.email }}</td>
+          <td>{{ user.accumulatedPoints }}</td>
           <td>
+            <router-link :to="`/usuarios/${user._id}/puntos`" class="btn btn-outline-info mx-2">
+              <span>Puntos</span>
+              <svg style="width: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+            </router-link>
             <button
               @click="deleteUser(user._id)"
               class="btn btn-outline-danger"

@@ -7,6 +7,8 @@ import Register from "@/views/Register.vue";
 //CRUD Users
 import Users from "@/views/users/Users.vue";
 import UserForm from "@/views/users/UserForm.vue";
+import PointsForm from "@/views/users/PointsForm.vue";
+
 //CRUD Prizes
 import Prizes from "@/views/prizes/Prizes.vue";
 import PrizeForm from "@/views/prizes/PrizeForm.vue";
@@ -25,6 +27,7 @@ const routes: Array<RouteRecordRaw> = [
             {path: '', redirect: '/usuarios'},
             {path: '/usuarios', component: Users},
             {path: '/usuarios/crear-nuevo', component: UserForm},
+            {path: '/usuarios/:id/puntos', component: PointsForm},
             {path: '/premios', component: Prizes},
             {path: '/premios/crear-nuevo', component: PrizeForm},
             {path: '/premios/:id/editar', component: PrizeForm},

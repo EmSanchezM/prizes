@@ -1,6 +1,9 @@
 <template>
   <div class="container mt-4">
     <h4>Premios disponibles</h4>
+    <div v-if="errorPoints" class="alert alert-danger" role="alert">
+      {{ errorPoints }}
+    </div>
     <div class="row alig-items-center">
       <div class="col mt-4" v-for="prize in prizes" :key="prize._id">
         <div class="card rounded">
@@ -41,7 +44,8 @@ export default {
         phoneNumber: '',
         email: '',
         accumulatedPoints: 0
-      }
+      },
+      errorPoints: null
     };
   },
   methods: {
@@ -63,6 +67,9 @@ export default {
         if (data.ok) {
           await this.$router.push("/canjear-premios");
         }
+        
+        this.errorPoints = 'No tienes suficientes puntos para canjear este premio';
+        
       }
     },
   },
