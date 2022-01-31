@@ -6,9 +6,9 @@
       <thead>
         <tr>
           <th class="text-left">#</th>
-          <th class="text-left">Name</th>
+          <th class="text-left">Nombre</th>
           <th class="text-left">Email</th>
-          <th class="text-left">Puntos acumulados</th>
+          <th class="text-left">Puntos Acumulados</th>
           <th class="text-left">Acciones</th>
         </tr>
       </thead>
@@ -18,7 +18,7 @@
           :key="user._id"
         >
           <td>{{ user._id }}</td>
-          <td>{{ user.name }} {{ user.lastName }}</td>
+          <td class="text-capitalize">{{ user.name }} {{ user.lastName }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.accumulatedPoints }}</td>
           <td>
