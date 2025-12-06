@@ -31,8 +31,9 @@
 <script lang="ts">
 import axios from "axios";
 import { Prize } from '../../model/prize';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   name: "ExchangeForm",
   data() {
     return {
@@ -45,7 +46,7 @@ export default {
         email: '',
         accumulatedPoints: 0
       },
-      errorPoints: null
+      errorPoints: null as string | null
     };
   },
   methods: {
@@ -86,5 +87,5 @@ export default {
     }
     this.getPrizes()
   },
-};
+});
 </script>
