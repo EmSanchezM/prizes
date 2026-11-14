@@ -1,22 +1,22 @@
 import { get } from "lodash";
 import config from "config";
-import { FilterQuery, UpdateQuery } from "mongoose";
+import { QueryFilter, Types, UpdateQuery } from "mongoose";
 import SessionModel, { SessionDocument } from "../models/session.model";
 import { verifyJwt, signJwt } from "../utils/jwt";
 import { findUser } from "./user.service";
 
-export async function createSession(userId: string, userAgent: string) {
+export async function createSession(userId: string | Types.ObjectId, userAgent: string) {
   const session = await SessionModel.create({ user: userId, userAgent });
 
   return session.toJSON();
 }
 
-export async function findSessions(query: FilterQuery<SessionDocument>) {
+export async function findSessions(query: QueryFilter<SessionDocument>) {
   return SessionModel.find(query).lean();
 }
 
 export async function updateSession(
-  query: FilterQuery<SessionDocument>,
+  query: QueryFilter<SessionDocument>,
   update: UpdateQuery<SessionDocument>
 ) {
   return SessionModel.updateOne(query, update);
