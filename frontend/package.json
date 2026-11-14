@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .ts,.vue src"
   },
   "dependencies": {
     "axios": "^1.21.1",
-    "core-js": "^3.51.0",
     "vue": "^3.5.45",
     "vue-router": "^4.4.5",
     "vuex": "^4.1.0"
@@ -18,16 +18,13 @@
     "@types/node": "^22.10.2",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
-    "@vue/cli-plugin-babel": "~5.0.9",
-    "@vue/cli-plugin-eslint": "~5.0.9",
-    "@vue/cli-plugin-router": "~5.0.9",
-    "@vue/cli-plugin-typescript": "~5.0.9",
-    "@vue/cli-plugin-vuex": "~5.0.9",
-    "@vue/cli-service": "~5.0.9",
-    "@vue/compiler-sfc": "^3.5.45",
+    "@vitejs/plugin-vue": "^6.0.11",
     "@vue/eslint-config-typescript": "^11.0.3",
     "eslint": "^8.57.1",
     "eslint-plugin-vue": "^9.31.0",
-    "typescript": "~5.7.2"
-  }
+    "typescript": "~5.7.2",
+    "vite": "^8.3.8",
+    "vue-tsc": "^3.3.14"
+  },
+  "type": "module"
 }
