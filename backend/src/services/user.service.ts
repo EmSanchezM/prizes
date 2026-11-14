@@ -1,8 +1,8 @@
-import { DocumentDefinition, FilterQuery, UpdateQuery } from "mongoose";
+import { Document, Types, UpdateQuery } from "mongoose";
 import { omit } from "lodash";
 import UserModel, { UserDocument } from "../models/user.model";
 
-export async function createUser(input: DocumentDefinition<Omit<UserDocument, 'createdAt' | 'updatedAt' | 'comparePassword'>>) {
+export async function createUser(input: Omit<UserDocument, keyof Document | 'createdAt' | 'updatedAt' | 'comparePassword'>) {
   try {
     const user = await UserModel.create(input);
 
@@ -41,7 +41,7 @@ export async function findUsers() {
   }
 }
 
-export async function findUser(userId: string) {
+export async function findUser(userId: string | Types.ObjectId) {
   try {
     return UserModel.findById(userId).select('-password');
   } catch (error: any) {
@@ -49,21 +49,21 @@ export async function findUser(userId: string) {
   }
 }
 
-export async function updateUser(userId: string, userUpdate: UpdateQuery<UserDocument>) {
+export async function updateUser(userId: string | Types.ObjectId, userUpdate: UpdateQuery<UserDocument>) {
   try {
-    const user = await UserModel.findByIdAndUpdate(userId, userUpdate);
+    const user = await UserModel.findByIdAndUpdate(userId, userUpdate, { new: true });
     return user;
   } catch (error: any) {
     throw new Error(error);
   }
 }
 
-export async function assignPoints(userId: string, quantityPoints: number) {
+export async function assignPoints(userId: string | Types.ObjectId, quantityPoints: number) {
   try {
     const filter = { _id: userId };
     const updatePoints = { accumulatedPoints: quantityPoints };
 
-    let userUpdated = await UserModel.findOneAndUpdate(filter, updatePoints);
+    let userUpdated = await UserModel.findOneAndUpdate(filter, updatePoints, { new: true });
     
     return omit(userUpdated?.toJSON(), 'password');
 
@@ -72,7 +72,7 @@ export async function assignPoints(userId: string, quantityPoints: number) {
   }
 }
 
-export async function deleteUser(userId: string) {
+export async function deleteUser(userId: string | Types.ObjectId) {
   try {
     return UserModel.findByIdAndDelete(userId);
   } catch (error: any) {

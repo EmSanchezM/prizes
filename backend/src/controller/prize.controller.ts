@@ -28,7 +28,7 @@ export async function createPrizeHandler(
 
         const prize = await createPrize(req.body);
 
-        return res.status(201).json({
+        res.status(201).json({
             ok: true,
             prize,
             message: 'Prize created successfully'
@@ -36,20 +36,20 @@ export async function createPrizeHandler(
 
     } catch (e: any) {
         logger.error(e);
-        return res.status(409).send(e.message);
+        res.status(409).send(e.message);
     }
 }
 
 export async function findPrizesHandler(req: Request, res: Response) {
     try {
         const prizes = await findPrizes();
-        return res.status(200).json({
+        res.status(200).json({
             ok: true,
             prizes
         });
     } catch (error: any) {
         logger.error(error);
-        return res.status(409).json({
+        res.status(409).json({
             ok: false,
             message: error.message
         });
@@ -59,13 +59,13 @@ export async function findPrizesHandler(req: Request, res: Response) {
 export async function findExchangesHandler(req: Request, res: Response) {
     try {
         const exchanges = await findExchanges();
-        return res.status(200).json({
+        res.status(200).json({
             ok: true,
             exchanges
         });
     } catch (error: any) {
         logger.error(error);
-        return res.status(409).json({
+        res.status(409).json({
             ok: false,
             message: error.message
         });
@@ -79,19 +79,20 @@ export async function findPrizeHandler(req: Request<ReadPrizeInput['params']>, r
         const prize = await findPrize(prizeId);
 
         if (!prize) {
-            return res.status(404).json({
+            res.status(404).json({
                 ok: false,
                 message: 'Prize not found'
             });
+            return;
         }
 
-        return res.status(200).json({
+        res.status(200).json({
             ok: true,
             prize
         });
     } catch (error: any) {
         logger.error(error);
-        return res.status(409).json({
+        res.status(409).json({
             ok: false,
             message: error.message
         });
@@ -107,22 +108,23 @@ export async function updatePrizeHandler(
         const prize = await findPrize(prizeId);
 
         if (!prize) {
-            return res.status(404).json({
+            res.status(404).json({
                 ok: false,
                 message: 'Prize not found'
             });
+            return;
         }
 
         await updatePrize(prizeId, req.body);
 
-        return res.status(200).json({
+        res.status(200).json({
             ok: true,
             message: 'Prize updated successfully'
         });
 
     } catch (error: any) {
         logger.error(error);
-        return res.status(409).json({
+        res.status(409).json({
             ok: false,
             message: error.message
         });
@@ -138,15 +140,16 @@ export async function deletePrizeHandler(
         const prize = await findPrize(prizeId);
 
         if (!prize) {
-            return res.status(404).json({
+            res.status(404).json({
                 ok: false,
                 message: 'Prize not found'
             });
+            return;
         }
 
         await deletePrize(prize._id);
 
-        return res.status(200).json({
+        res.status(200).json({
             ok: true,
             message: 'Prize deleted successfully',
             prize
@@ -154,7 +157,7 @@ export async function deletePrizeHandler(
 
     } catch (error: any) {
         logger.error(error);
-        return res.status(409).json({
+        res.status(409).json({
             ok: false,
             message: error.message
         });
@@ -172,36 +175,39 @@ export async function assignPrizeUserHandler(
         const user = await findUser(userId);
 
         if (!prize) {
-            return res.status(404).json({
+            res.status(404).json({
                 ok: false,
                 message: 'Prize not found'
             });
+            return;
         }
 
         if (!user) {
-            return res.status(404).json({
+            res.status(404).json({
                 ok: false,
                 message: 'User not found'
             });
+            return;
         }
 
         if (prize.points > user.accumulatedPoints) {
-            return res.status(400).json({
+            res.status(400).json({
                 ok: false,
                 message: 'No tienes suficientes puntos acumulados'
             });
+            return;
         }
 
         await assignPrize(user, prize);
 
-        return res.status(200).json({
+        res.status(200).json({
             ok: true,
             message: 'Assigned Prize successfully'
         });
 
     } catch (error: any) {
         logger.error(error);
-        return res.status(409).json({
+        res.status(409).json({
             ok: false,
             message: error.message
         });

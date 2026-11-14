@@ -12,7 +12,8 @@ export function signJwt(
   ).toString("ascii");
 
   return jwt.sign(object, signingKey, {
-    ...(options && options)
+    ...(options && options),
+    algorithm: "RS256",
   });
 }
 
@@ -25,7 +26,7 @@ export function verifyJwt(
   );
 
   try {
-    const decoded = jwt.verify(token, publicKey);
+    const decoded = jwt.verify(token, publicKey, { algorithms: ["RS256"] });
     return {
       valid: true,
       expired: false,

@@ -1,10 +1,10 @@
-import { DocumentDefinition, UpdateQuery } from "mongoose";
+import { Document, Types, UpdateQuery } from "mongoose";
 import { omit } from "lodash";
 import UserModel, { UserDocument } from "../models/user.model";
 import Prize, { PrizeDocument } from "../models/prize.model";
 import Exchange, { ExchangeDocument } from "../models/exchange.model";
 
-export async function createPrize(input: DocumentDefinition<Omit<PrizeDocument, 'createdAt' | 'updatedAt'>>) {
+export async function createPrize(input: Omit<PrizeDocument, keyof Document | 'createdAt' | 'updatedAt'>) {
   try {
     const prize = await Prize.create(input);
 
@@ -23,7 +23,7 @@ export async function findPrizes() {
   }
 }
 
-export async function findPrize(prizeId: string) {
+export async function findPrize(prizeId: string | Types.ObjectId) {
   try {
     return Prize.findById(prizeId);
   } catch (error: any) {
@@ -40,7 +40,7 @@ export async function findExchanges(){
   }
 }
 
-export async function updatePrize(prizeId: string, prizeUpdate: UpdateQuery<PrizeDocument>) {
+export async function updatePrize(prizeId: string | Types.ObjectId, prizeUpdate: UpdateQuery<PrizeDocument>) {
   try {
     const prize = await Prize.findByIdAndUpdate(prizeId, prizeUpdate);
     return prize;
@@ -49,7 +49,7 @@ export async function updatePrize(prizeId: string, prizeUpdate: UpdateQuery<Priz
   }
 }
 
-export async function assignPrize(user: DocumentDefinition<Omit<UserDocument, 'createdAt'|'updatedAt'|'comparePassword'>>, prize: DocumentDefinition<Omit<PrizeDocument, 'createdAt' | 'updatedAt'>>) {
+export async function assignPrize(user: Omit<UserDocument, 'createdAt'|'updatedAt'|'comparePassword'>, prize: Omit<PrizeDocument, 'createdAt' | 'updatedAt'>) {
   try {
 
     const exchange = await Exchange.create({
@@ -70,7 +70,7 @@ export async function assignPrize(user: DocumentDefinition<Omit<UserDocument, 'c
   }
 }
 
-export async function deletePrize(prizeId: string) {
+export async function deletePrize(prizeId: string | Types.ObjectId) {
   try {
     return Prize.findByIdAndDelete(prizeId);
   } catch (error: any) {

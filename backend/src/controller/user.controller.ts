@@ -17,14 +17,14 @@ export async function createUserHandler(
 
     const user = await createUser(newUser);
 
-    return res.status(201).json({
+    res.status(201).json({
       ok: true,
       user,
     });
 
   } catch (e: any) {
     logger.error(e);
-    return res.status(409).send(e.message);
+    res.status(409).send(e.message);
   }
 }
 
@@ -41,27 +41,27 @@ export async function createAdminHandler(
     
     const user = await createUser(newUser);
 
-    return res.status(201).json({
+    res.status(201).json({
       ok: true,
       user,
     });
 
   } catch (e: any) {
     logger.error(e);
-    return res.status(409).send(e.message);
+    res.status(409).send(e.message);
   }
 }
 
 export async function findUsersHandler(req: Request, res: Response){
   try {
       const users = await findUsers();
-      return res.status(200).json({
+      res.status(200).json({
           ok: true,
           users
       });
   } catch (error: any) {
       logger.error(error);
-      return res.status(409).json({
+      res.status(409).json({
           ok: false,
           message: error.message 
       });        
@@ -75,19 +75,20 @@ export async function findUserHandler(req: Request<ReadUserInput['params']>, res
       const user = await findUser(userId);
 
       if(!user){
-          return res.status(404).json({
+          res.status(404).json({
               ok: false,
               message: 'User not found'
           });
+          return;
       }
 
-      return res.status(200).json({
+      res.status(200).json({
           ok: true,
           user 
       });
   } catch (error: any) {
       logger.error(error);
-      return res.status(409).json({
+      res.status(409).json({
           ok: false,
           message: error.message 
       });        
@@ -103,22 +104,23 @@ export async function updateUserHandler(
       const user = await findUser(userId);
       
       if(!user){
-          return res.status(404).json({
+          res.status(404).json({
               ok: false,
               message: 'User not found'
           });
+          return;
       }
 
       await updateUser(userId, req.body);
 
-      return res.status(200).json({
+      res.status(200).json({
           ok: true,
           message: 'User updated successfully'
       });
 
   } catch (error: any) {
       logger.error(error);
-      return res.status(409).json({
+      res.status(409).json({
           ok: false,
           message: error.message 
       }); 
@@ -134,15 +136,16 @@ export async function deleteUserHandler(
       const user = await findUser(userId);
 
       if(!user){
-          return res.status(404).json({
+          res.status(404).json({
               ok: false,
               message: 'User not found'
           });
+          return;
       }
 
      await deleteUser(user._id);
 
-      return res.status(200).json({
+      res.status(200).json({
           ok: true, 
           message: 'User deleted successfully',
           data: user
@@ -150,7 +153,7 @@ export async function deleteUserHandler(
 
   } catch (error: any) {
       logger.error(error);
-      return res.status(409).json({
+      res.status(409).json({
           ok: false,
           message: error.message 
       }); 
@@ -166,10 +169,11 @@ export async function assignPointsUserHandler(
       const user = await findUser(userId);
       
       if(!user){
-          return res.status(404).json({
+          res.status(404).json({
               ok: false,
               message: 'User not found'
           });
+          return;
       }
       const { quantityPoints } = req.body;
 
@@ -177,7 +181,7 @@ export async function assignPointsUserHandler(
 
       const userUpdate = await assignPoints(user._id, points);
 
-      return res.status(200).json({
+      res.status(200).json({
           ok: true,
           message: 'Assigned Points successfully',
           user: userUpdate
@@ -185,7 +189,7 @@ export async function assignPointsUserHandler(
 
   } catch (error: any) {
       logger.error(error);
-      return res.status(409).json({
+      res.status(409).json({
           ok: false,
           message: error.message 
       }); 
