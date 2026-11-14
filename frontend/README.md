@@ -2,23 +2,28 @@
 
 ## Project setup
 ```
-npm install
+pnpm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+pnpm serve
 ```
 
-### Compiles and minifies for production
+### Type-checks, compiles and minifies for production
 ```
-npm run build
+pnpm build
 ```
 
-### Lints and fixes files
+### Previews the production build locally
 ```
-npm run lint
+pnpm preview
+```
+
+### Lints files
+```
+pnpm lint
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See [Vite Configuration Reference](https://vite.dev/config/).
