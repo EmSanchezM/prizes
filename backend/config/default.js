@@ -1,8 +1,8 @@
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 
 dotenv.config();
 
-export default {
+module.exports = {
     port: 8000,
     dbUri: process.env.DATABASE_URI,
     saltWorkFactor: 10,
