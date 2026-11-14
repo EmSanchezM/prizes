@@ -30,7 +30,7 @@
     "@types/express": "5.0.6",
     "@types/jsonwebtoken": "9.0.10",
     "@types/lodash": "4.17.27",
-    "@types/node": "24.10.1",
+    "@types/node": "26.6.6",
     "ts-node-dev": "2.0.0",
     "typescript": "5.7.2"
   }
